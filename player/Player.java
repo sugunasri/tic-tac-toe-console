@@ -3,12 +3,12 @@ package player;
 import java.util.Scanner;
 
 public class Player {
-    String name;
-    String phno;
-    int age;
-    String city;
-    String mailID;
-    char symbol;
+    private String name;
+    private String phno;
+    private int age;
+    private String city;
+    private String mailID;
+    private char symbol;
         
     public char getSymbol() {
         return symbol;
