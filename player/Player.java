@@ -8,7 +8,14 @@ public class Player {
     int age;
     String city;
     String mailID;
+    char symbol;
         
+    public char getSymbol() {
+        return symbol;
+    }
+    public void setSymbol(char symbol) {
+        this.symbol = symbol;
+    }
     public String getCity() {
         return city;
     }
@@ -50,14 +57,27 @@ public class Player {
         Scanner scn = new Scanner(System.in);
         System.out.print("Enter name: ");
         this.name = scn.nextLine();
+        System.out.print("Enter mobile number: ");
+        this.phno = scn.nextLine();
+        System.out.print("Enter your age: ");
+        this.age= scn.nextInt();
+        System.out.print("Enter your city: ");
+        this.city = scn.nextLine();
+        System.out.print("Enter your mail ID: ");
+        this.mailID = scn.nextLine();
+        System.out.print("Choose a character: ");
+        this.symbol = scn.nextLine().charAt(0);
+
+        scn.close();
     }
 
-    public Player(String n,String p,int a,String c,String m){
+    public Player(String n,String p,int a,String c,String m,char ch){
         this.name = n;
         this.phno = p;
         this.age = a;
         this.city = c;
         this.mailID = m;
+        this.symbol = ch;
 
     }
 
