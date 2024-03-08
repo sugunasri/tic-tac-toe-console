@@ -7,7 +7,7 @@ public class App{
         Scanner scn = new Scanner(System.in);
         System.out.print("Enter the size of the board: ");
         Board b = new Board(scn.nextInt(),'-');
-
+// suguna sri
         scn.close();
     }
 }
