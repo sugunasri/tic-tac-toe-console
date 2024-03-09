@@ -1,6 +1,8 @@
 package game;
 
 import board.Board;
+
+import java.util.Random;
 import java.util.Scanner;
 import player.Player;
 
@@ -14,11 +16,12 @@ public class Game{
     String s2;
 
     public Game(Player[] players,Board board){
+        Random random = new Random();
+        this.turn = random.nextInt(2);
         this.players = players;
         this.board = board;
         this.moves = 0;
         this.over = false;
-        this.turn = 0;
 
         StringBuilder t1 = new StringBuilder();
         StringBuilder t2 = new StringBuilder();
@@ -41,12 +44,13 @@ public class Game{
             System.out.println();
         }
     }
-    
+    // Get the position
     public int getindex(){
         Scanner scn = new Scanner(System.in);
         while(true){
             System.out.println("Player: "+players[turn].getName()+" give one place");
-            int place = scn.nextInt() - 1;
+            int place = scn.nextInt();
+            place -= 1;
 
             int n = this.board.size;
 
@@ -62,12 +66,13 @@ public class Game{
                 System.out.println("Position is already occupied");
                 continue;
             }
-            scn.close();
+            // scn.close();
             return place;
 
         }
     }
 
+    //checking possiblities
     public boolean checkcombinations(){
         int n = this.board.size;
         for(int i=0;i<n;i++){
@@ -120,22 +125,55 @@ public class Game{
     public void play(){
         printconfig();
         int n = this.board.size;
+        Scanner scn = new Scanner(System.in);
         while (!over) {
             int index = getindex();
-
+            moves++;
             int row = index/n;
             int col = index%n;
 
             this.board.matrix[row][col] = players[turn].getSymbol();
             if (moves >= n*n) {
-                System.out.println("Game Draw");
-                return;
+                printconfig();
+                System.out.println("----Game Draw----");
+                
+                System.out.print("Want to play one more game?(Y/N): ");
+                char ch = scn.nextLine().charAt(0);
+
+                if(Character.toLowerCase(ch) == 'y'){
+                    Random random = new Random();
+                    this.turn = random.nextInt(2);
+                    this.moves = 0;
+                    this.over = false;
+                    this.board.setconfig('-');
+                    play();
+                }else{
+                    return;
+                }
             }
 
             if (moves >= 2*n-1 && checkcombinations() == true) {
                 over = true;
                 printconfig();
+                System.out.println("----GAME ENDS----");
                 System.out.println("Winner is: " + players[turn].getName());
+                System.out.println();
+
+
+                System.out.print("Want to play one more game?(Y/N): ");
+                char ch = scn.nextLine().charAt(0);
+
+                
+                if(Character.toLowerCase(ch) == 'y'){
+                    Random random = new Random();
+                    this.turn = random.nextInt(2);
+                    this.moves = 0;
+                    this.over = false;
+                    this.board.setconfig('-');
+                    play();
+                }else{
+                    return;
+                }
                 return;
             } 
 

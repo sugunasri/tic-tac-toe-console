@@ -60,6 +60,10 @@ public class Player {
         this.phno = scn.nextLine();
         System.out.print("Enter your age: ");
         this.age = scn.nextInt();
+        while(this.age<1){
+            System.out.print("Enter appropriate age: ");
+            this.age = scn.nextInt();
+        }
         scn.nextLine();
         System.out.print("Enter your city: ");
         this.city = scn.nextLine();
@@ -67,7 +71,6 @@ public class Player {
         this.mailID = scn.nextLine();
         System.out.print("Choose a character: ");
         this.symbol = scn.nextLine().charAt(0);
-        scn.close();
     }
 
     public Player(String n,String p,int a,String c,String m,char ch){
