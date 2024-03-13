@@ -133,25 +133,6 @@ public class Game{
             int col = index%n;
 
             this.board.matrix[row][col] = players[turn].getSymbol();
-            if (moves >= n*n) {
-                printconfig();
-                System.out.println("----Game Draw----");
-                
-                System.out.print("Want to play one more game?(Y/N): ");
-                char ch = scn.nextLine().charAt(0);
-
-                if(Character.toLowerCase(ch) == 'y'){
-                    Random random = new Random();
-                    this.turn = random.nextInt(2);
-                    this.moves = 0;
-                    this.over = false;
-                    this.board.setconfig('-');
-                    play();
-                }else{
-                    return;
-                }
-            }
-
             if (moves >= 2*n-1 && checkcombinations() == true) {
                 over = true;
                 printconfig();
@@ -175,7 +156,27 @@ public class Game{
                     return;
                 }
                 return;
-            } 
+            }
+            if (moves >= n*n) {
+                printconfig();
+                System.out.println("----Game Draw----");
+                
+                System.out.print("Want to play one more game?(Y/N): ");
+                char ch = scn.nextLine().charAt(0);
+
+                if(Character.toLowerCase(ch) == 'y'){
+                    Random random = new Random();
+                    this.turn = random.nextInt(2);
+                    this.moves = 0;
+                    this.over = false;
+                    this.board.setconfig('-');
+                    play();
+                }else{
+                    return;
+                }
+            }
+
+             
 
             turn  = (turn +1)%2;
             printconfig();
